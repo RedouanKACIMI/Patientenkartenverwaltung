@@ -26,7 +26,7 @@ public class Patient {
 
     private String kassenname;
 
-    private int IK;
+    private Long ik;
 
     private Date ablaufdatum;
 
@@ -71,11 +71,11 @@ public class Patient {
         this.kassenname = kassenname;
     }
 
-    public int getIK() {
-        return IK;
+    public Long getIK() {
+        return ik;
     }
 
-    public void setIK(int IK) { this.IK = IK; }
+    public void setIK(Long ik) { this.ik = ik; }
 
     public Date getAblaufdatum() { return ablaufdatum; }
 

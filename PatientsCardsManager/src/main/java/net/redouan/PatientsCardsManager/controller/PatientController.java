@@ -31,6 +31,8 @@ public class PatientController {
     @GetMapping("/search/{id}")
     public ResponseEntity<Patient> getPatientById(@PathVariable("id") Long id) {
         Patient patient = patientService.showPatient(id);
+        if (patient == null)
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         return new ResponseEntity<>(patient, HttpStatus.OK);
     }
 
