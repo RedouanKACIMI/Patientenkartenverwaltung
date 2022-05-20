@@ -7,6 +7,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
+import java.util.Optional;
 
 /**
  * Controller Class to process REST requests.
@@ -38,13 +39,16 @@ public class PatientController {
 
     @PostMapping("/add")
     public ResponseEntity<Patient> postPatient(@RequestBody Patient patient) {
-        Patient newPatient  = patientService.addPatient(patient);
+        Patient newPatient = patientService.addPatient(patient);
+        if (newPatient == null){
+            return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
+        }
         return new ResponseEntity<>(newPatient, HttpStatus.CREATED);
     }
 
     @PutMapping("/update")
     public ResponseEntity<Patient> putPatient(@RequestBody Patient patient) {
-        Patient updatePatient  = patientService.updatePatient(patient);
+        Patient updatePatient = patientService.updatePatient(patient);
         return new ResponseEntity<>(updatePatient, HttpStatus.OK);
     }
 

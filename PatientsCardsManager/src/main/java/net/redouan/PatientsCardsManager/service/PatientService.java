@@ -5,6 +5,7 @@ import net.redouan.PatientsCardsManager.repository.PatientRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -18,6 +19,10 @@ public class PatientService {
 
     public Patient addPatient(Patient patient) {
         //TODO: validate data
+        if (patient.getGeburtsdatum().after(new Date())
+         || patient.getAblaufdatum().before(new Date())){
+            return null;
+        }
         return patientRepository.save(patient);
     }
 
