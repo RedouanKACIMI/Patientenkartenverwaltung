@@ -10,124 +10,35 @@ body{
     height: 100%;
 }
 
-.widget-26 {
-  color: #3c4142;
-  font-weight: 400;
+button.btn-delete {
+    color: var(--danger);
+    background-color: #ffcccb;
 }
 
-.widget-26 tr:first-child td {
-  border: 0;
+.btn-edit {
+    color: var(--primary);
+    background-color: #e3f2fd;
 }
 
-.widget-26 .widget-26-job-emp-img img {
-  width: 35px;
-  height: 35px;
-  border-radius: 50%;
+.btn-add {
+    color: white;
+    background-color: #2f6e80;
 }
 
-.widget-26 .widget-26-job-title {
-  min-width: 200px;
+.btn-search {
+    color: white;
+    background-color: #2f6e80;
+    border-radius: 12px;
 }
 
-.widget-26 .widget-26-job-title a {
-  font-weight: 400;
-  font-size: 0.875rem;
-  color: #3c4142;
-  line-height: 1.5;
+.kassenname {
+    margin-bottom: 0;
 }
 
-.widget-26 .widget-26-job-title a:hover {
-  color: #68CBD7;
-  text-decoration: none;
+.iknummer {
+    font-size: 14px;
+    color: #77c5b8;
 }
-
-.widget-26 .widget-26-job-title .employer-name {
-  margin: 0;
-  line-height: 1.5;
-  font-weight: 400;
-  color: #3c4142;
-  font-size: 0.8125rem;
-  color: #3c4142;
-}
-
-.widget-26 .widget-26-job-title .employer-name:hover {
-  color: #68CBD7;
-  text-decoration: none;
-}
-
-.widget-26 .widget-26-job-title .time {
-  font-size: 12px;
-  font-weight: 400;
-}
-
-.widget-26 .widget-26-job-info {
-  min-width: 100px;
-  font-weight: 400;
-}
-
-.widget-26 .widget-26-job-info p {
-  line-height: 1.5;
-  color: #3c4142;
-  font-size: 0.8125rem;
-}
-
-.widget-26 .widget-26-job-info .location {
-  color: #3c4142;
-}
-
-.widget-26 .widget-26-job-salary {
-  min-width: 70px;
-  font-weight: 400;
-  color: #3c4142;
-  font-size: 0.8125rem;
-}
-
-.widget-26 .widget-26-job-category {
-  padding: .5rem;
-  display: inline-flex;
-  white-space: nowrap;
-  border-radius: 15px;
-}
-
-.widget-26 .widget-26-job-category .indicator {
-  width: 13px;
-  height: 13px;
-  margin-right: .5rem;
-  float: left;
-  border-radius: 50%;
-}
-
-.widget-26 .widget-26-job-category span {
-  font-size: 0.8125rem;
-  color: #3c4142;
-  font-weight: 600;
-}
-
-.widget-26 .widget-26-job-starred svg {
-  width: 20px;
-  height: 20px;
-  color: #fd8b2c;
-}
-
-.widget-26 .widget-26-job-starred svg.starred {
-  fill: #fd8b2c;
-}
-.bg-soft-base {
-  background-color: #e1f5f7;
-}
-.bg-soft-warning {
-    background-color: #fff4e1;
-}
-.bg-soft-success {
-    background-color: #d1f6f2;
-}
-.bg-soft-danger {
-    background-color: #fedce0;
-}
-.bg-soft-info {
-    background-color: #d7efff;
-}
-
 
 .search-form {
   width: 80%;
@@ -167,10 +78,6 @@ body{
 .search-form button svg {
   width: 24px;
   height: 24px;
-}
-
-.search-body {
-  margin-bottom: 1.5rem;
 }
 
 .search-body .search-filters .filter-list {
@@ -257,8 +164,8 @@ body{
     word-wrap: break-word;
     background-color: #ffffff;
     background-clip: border-box;
-    border: 1px solid #e6e4e9;
-    border-radius: 8px;
+    border: 3px solid #ffffff;
+    border-radius: 14px;
 }
 
 

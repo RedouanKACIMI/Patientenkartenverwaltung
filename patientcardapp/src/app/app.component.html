@@ -1,4 +1,4 @@
-<div class="container">
+<div class="container" id="main-container">
   <div class="row">
       <div class="col-lg-12 card-margin">
           <div class="card search-form">
@@ -6,16 +6,16 @@
                   <form id="search-form">
                       <div class="row">
                           <div class="col-12">
-                              <div class="row no-gutters">
+                              <form #searchForm="ngForm" (ngSubmit)="searchPatients(searchForm.value.search)" class="row no-gutters">
                                   <div class="col-lg-11 col-md-9 col-sm-12 p-0">
-                                      <input type="text" placeholder="Search..." class="form-control" id="search" name="search">
+                                      <input type="text" ngModel placeholder="Suchen..." class="form-control" id="search" name="search">
                                   </div>
                                   <div class="col-lg-1 col-md-3 col-sm-12 p-0">
-                                      <button type="submit" class="btn btn-base">
-                                          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-search"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+                                      <button type="submit" class="btn btn-base btn-search">
+                                          <i class="fa fa-search"></i>
                                       </button>
                                   </div>
-                              </div>
+                              </form>
                           </div>
                       </div>
                   </form>
@@ -35,9 +35,9 @@
                                           <div class="col-lg-12">
                                               <div class="result-actions">
                                                   <div class="result-views">
-                                                      <button type="button" class="btn btn-soft-base btn-icon">
+                                                      <button type="button" data-toggle="modal" data-target="#addPatientModal" class="btn btn-soft-base btn-icon btn-add">
                                                           <i class="fa fa-plus"></i>
-                                                          <b>Add Patient Card</b>
+                                                          <b> Patientenkarte hinzufügen</b>
                                                       </button>
                                                   </div>
                                               </div>
@@ -48,36 +48,45 @@
                                   <div class="result-body">
                                       <div class="table-responsive">
                                           <table class="table widget-26">
+                                              <thead>
+                                                <tr>
+                                                  <th><b>Bearbeiten</b></th>
+                                                  <th><b>Name</b></th>
+                                                  <th><b>Geburtsdatum</b></th>
+                                                  <th><b>Versicherungsnummer</b></th>
+                                                  <th><b>Kasse</b></th>
+                                                  <th><b>Gültig bis</b></th>
+                                                  <th><b>Löschen</b></th>
+                                                </tr>
+                                              </thead>
                                               <tbody *ngFor="let patient of patients">
                                                   <tr>
-                                                      <td>
-                                                          <div class="widget-26-job-starred">
-                                                            <button type="button" class="btn btn-soft-base btn-icon">
-                                                              <i class="fa fa-pencil"></i>
-                                                            </button>
+                                                      <td class="col-1">
+                                                          <button (click)="onOpenUpdateModal(patient)" type="button" class="btn btn-soft-base btn-icon btn-edit">
+                                                            <i class="fa fa-pencil"></i>
+                                                          </button>
+                                                      </td>
+                                                      <td class="col-2">
+                                                          <p>{{patient.vorname +" "+ patient.name}}</p>
+                                                      </td>
+                                                      <td class="col-2">
+                                                          <p>{{patient.geburtsdatum}}</p>
+                                                      </td>
+                                                      <td class="col-2">
+                                                          <p>{{patient.versichertennummer}}</p>
+                                                      </td>
+                                                      <td class="col-2">
+                                                          <div >
+                                                              <p class="kassenname">{{patient.kassenname}}</p>
+                                                              <p class="iknummer">{{patient.ik}}</p>
                                                           </div>
                                                       </td>
-                                                      <td>
-                                                          <div class="widget-26-job-title">
-                                                              <p>{{patient.vorname +" "+ patient.name}}</p>
-                                                              <p class="m-0 employer-name">Geb. am: {{patient.geburtsdatum}}</p>
-                                                          </div>
+                                                      <td  class="col-2">
+                                                          <div>{{patient.ablaufdatum}}</div>
                                                       </td>
-                                                      <td>
-                                                          <div class="widget-26-job-salary">Versicherungsnummer: {{patient.versichertennummer}}</div>
-                                                      </td>
-                                                      <td>
-                                                          <div class="widget-26-job-info">
-                                                              <p class="type m-0">{{patient.kassenname}}</p>
-                                                              <p class="text-muted m-0">{{patient.ik}}</p>
-                                                          </div>
-                                                      </td>
-                                                      <td>
-                                                          <div class="widget-26-job-salary">Gültig bis: {{patient.ablaufdatum}}</div>
-                                                      </td>
-                                                      <td>
-                                                          <div class="widget-26-job-starred">
-                                                            <button type="button" class="btn btn-soft-base btn-icon">
+                                                      <td  class="col-1">
+                                                          <div>
+                                                            <button (click)="onOpenDeleteModal(patient)" type="button" class="btn btn-soft-base btn-icon btn-delete">
                                                               <i class="fa fa-times"></i>
                                                             </button>
                                                           </div>
@@ -95,3 +104,137 @@
           </div>
       </div>
   </div>
+
+
+
+  
+<button style="display: none;" type="button" id="updateModalBtn" data-toggle="modal" data-target="#updatePatientModal"></button>
+<button style="display: none;" type="button" id="deleteModalBtn" data-toggle="modal" data-target="#deletePatientModal"></button>
+
+
+
+
+<!-- Modal Add -->
+<div class="modal fade" id="addPatientModal" tabindex="-1" role="dialog" aria-labelledby="addPatientModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="addPatientModalLabel">Patientenkarte hinzufügen</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <form #addForm="ngForm" (ngSubmit)="onAddPatient(addForm)">
+      <div class="modal-body">
+          <div class="form-group">
+            <label for="name">Name</label>
+            <input type="text" ngModel name="name" id="name" class="form-control" placeholder="Name" required>
+          </div>
+          <div class="form-group">
+            <label for="vorname">Vorname</label>
+            <input type="text" ngModel name="vorname" id="vorname" class="form-control" placeholder="Vorname" required>
+          </div>
+          <div class="form-group">
+            <label for="geburtsdatum">Geburtsdatum</label>
+            <input type="date" ngModel name="geburtsdatum" id="geburtsdatum" class="form-control" placeholder="Geburtsdatum" required>
+          </div>
+          <div class="form-group">
+            <label for="versichertennummer">Versichertennummer</label>
+            <input type="text" ngModel name="versichertennummer" id="versichertennummer" class="form-control" placeholder="Versichertennummer" required>
+          </div>
+          <div class="form-group">
+            <label for="kassenname">Kassenname</label>
+            <input type="text" ngModel name="kassenname" id="kassenname" class="form-control" placeholder="Kassenname" required>
+          </div>
+          <div class="form-group">
+            <label for="ik">Institutionskennzeichen</label>
+            <input type="text" ngModel name="ik" id="ik" class="form-control" placeholder="Institutionskennzeichen" required>
+          </div>
+          <div class="form-group">
+            <label for="ablaufdatum">Ablaufdatum</label>
+            <input type="date" ngModel name="ablaufdatum" id="ablaufdatum" class="form-control" placeholder="Ablaufdatum" required>
+          </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" id="addFormDismissBtn" data-dismiss="modal">Abbrechen</button>
+        <button [disabled]="addForm.invalid" type="submit" class="btn btn-primary">Senden</button>
+      </div>
+    </form>
+    </div>
+  </div>
+</div>
+
+
+
+<!-- Modal Update -->
+<div class="modal fade" id="updatePatientModal" tabindex="-1" role="dialog" aria-labelledby="updatePatientModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="updatePatientModalLabel">Patientenkarte bearbeiten</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <form #updateForm="ngForm" (ngSubmit)="onUpdatePatient(updateForm)">
+      <div class="modal-body">
+          <div class="form-group">
+            <label for="name">Name</label>
+            <input type="text" ngModel value="{{editPatient?.name}}" name="name" id="name" class="form-control" placeholder="Name" disabled required>
+          </div>
+          <div class="form-group">
+            <label for="vorname">Vorname</label>
+            <input type="text" ngModel value="{{editPatient?.vorname}}" name="vorname" id="vorname" class="form-control" placeholder="Vorname" disabled required>
+          </div>
+          <div class="form-group">
+            <label for="geburtsdatum">Geburtsdatum</label>
+            <input type="date" ngModel value="{{editPatient?.geburtsdatum}}" name="geburtsdatum" id="geburtsdatum" class="form-control" placeholder="Geburtsdatum" disabled required>
+          </div>
+          <div class="form-group">
+            <label for="versichertennummer">Versichertennummer</label>
+            <input type="text" ngModel value="{{editPatient?.versichertennummer}}" name="versichertennummer" id="versichertennummer" class="form-control" placeholder="Versichertennummer" disabled required>
+          </div>
+          <div class="form-group">
+            <label for="kassenname">Kassenname</label>
+            <input type="text" ngModel value="{{editPatient?.kassenname}}" name="kassenname" id="kassenname" class="form-control" placeholder="Kassenname" required>
+          </div>
+          <div class="form-group">
+            <label for="ik">Institutionskennzeichen</label>
+            <input type="text" ngModel value="{{editPatient?.ik}}" name="ik" id="ik" class="form-control" placeholder="Institutionskennzeichen" required>
+          </div>
+          <div class="form-group">
+            <label for="ablaufdatum">Ablaufdatum</label>
+            <input type="date" ngModel value="{{editPatient?.ablaufdatum}}" name="ablaufdatum" id="ablaufdatum" class="form-control" placeholder="Ablaufdatum" required>
+          </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" id="updateFormDismissBtn" data-dismiss="modal">Abbrechen</button>
+        <button type="submit" class="btn btn-primary">Speichern</button>
+      </div>
+    </form>
+    </div>
+  </div>
+</div>
+
+
+
+<!-- Modal Delete -->
+<div class="modal fade" id="deletePatientModal" tabindex="-1" role="dialog" aria-labelledby="deletePatientModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="deletePatientModalLabel">Patientenkarte löschen</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">Sind Sie sicher dass Sie {{deletePatient?.name + ' ' + deletePatient?.vorname}} löschen möchten?</div>
+      
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" id="deleteFormDismissBtn" data-dismiss="modal">Abbrechen</button>
+        <button (click)="onDeletePatient(deletePatient.id)" type="submit" class="btn btn-danger">Löschen</button>
+      </div>
+    </div>
+  </div>
+</div>
+
