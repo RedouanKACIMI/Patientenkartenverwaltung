@@ -20,7 +20,7 @@ Hierzu soll eine ==Rest Schnittstelle mit Java== entwickelt werden. Eine Prüfun
 ### Ansatz:
 
 fürs Back-end [here](/PatientsCardsManager/) wurde Java mit Spring Boot Framework benutzt, verknupft mit einer MySQL Datenbank.
-Front End wird mit AngularJS betrieben.
+Front End [here](/patientcardapp/) wird mit AngularJS betrieben.
 
 
 ### API REST Interface:
