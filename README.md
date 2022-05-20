@@ -31,3 +31,7 @@ BaseUrl: [Host]
 - eine Karte hinzufügen: ```POST '/patient' ``` + Payload (JSON)
 - eine Karte updaten: ```PUT '/patient' ``` + Payload (JSON)
 - eine Karte löschen: ```DELETE '/patient/{id}' ``` 
+
+
+### Datenbank Verknüpfung.
+In dieser [File](/Patientenkartenverwaltung/PatientsCardsManager/src/main/resources/application.properties) stehen die Anmeldedaten zur MySQL Database. Entweder eine Lokal Datenbank auf dem Localhost einrichten oder die auskommentierte Zeile nochmal einblenden, um die MySql database die ich auf einem Google Cloud Server eingerichtet habe nutzen.
