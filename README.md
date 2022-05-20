@@ -33,5 +33,10 @@ BaseUrl: [Host]
 - eine Karte löschen: ```DELETE '/patient/{id}' ``` 
 
 
-### Datenbank Verknüpfung.
+### Datenbank Verknüpfung:
 In dieser [File](/Patientenkartenverwaltung/PatientsCardsManager/src/main/resources/application.properties) stehen die Anmeldedaten zur MySQL Database. Entweder eine Lokal Datenbank auf dem Localhost einrichten oder die auskommentierte Zeile nochmal einblenden, um die MySql database die ich auf einem Google Cloud Server eingerichtet habe nutzen.
+
+
+### Live Demo:
+
+Noch nicht deployed : http://Patientenkartenverwaltung.redouan.net
